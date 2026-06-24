@@ -11,7 +11,9 @@
     <style>
         body {
             font-family: 'Prompt', sans-serif;
-            background: linear-gradient(135deg, #eef2ff 0%, #ede9fe 100%);
+            background-color: #DCE7FF;
+            background-image: radial-gradient(#C0D0FF 1px, transparent 1px);
+            background-size: 30px 30px;
             min-height: 100vh;
         }
         
@@ -35,7 +37,7 @@
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.15);
+            box-shadow: 0 10px 30px rgba(140, 154, 199, 0.15);
         }
 
         .virtual-card {
@@ -50,10 +52,10 @@
                 extend: {
                     colors: {
                         custom: {
-                            primary: '#a78bfa',
-                            secondary: '#ddd6fe',
-                            accent: '#8b5cf6',
-                            text: '#5b21b6'
+                            primary: '#C0D0FF',
+                            secondary: '#E8EDFF',
+                            accent: '#8C9AC7',
+                            text: '#8C9AC7'
                         }
                     }
                 }
@@ -63,14 +65,14 @@
 </head>
 <body class="flex flex-col items-center py-10 px-4 text-custom-text">
 
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-custom-primary/90 text-white px-6 py-3 rounded-2xl shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 font-medium">
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-custom-accent/90 text-white px-6 py-3 rounded-2xl shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 font-medium">
         คัดลอกเลขบัญชีแล้ว
     </div>
 
     <div class="max-w-[400px] w-full space-y-6">
         <div class="text-center">
             <h1 class="text-3xl font-bold text-custom-accent">Honeplycha</h1>
-            <p class="text-custom-primary font-medium">Payment & Checkout</p>
+            <p class="text-custom-accent font-medium">Payment & Checkout</p>
         </div>
 
         <div class="glass-card rounded-[3rem] p-4">
@@ -85,27 +87,25 @@
                 </div>
 
                 <div class="space-y-4">
-                    <!-- GSB Card -->
-                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-secondary cursor-pointer" onclick="copyText('020101373478')">
+                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-primary cursor-pointer" onclick="copyText('020101373478')">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold text-custom-primary uppercase">ธนาคารออมสิน</span>
-                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full">คัดลอก</span>
+                            <span class="text-xs font-bold text-custom-accent uppercase">ธนาคารออมสิน</span>
+                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full text-custom-accent">คัดลอก</span>
                         </div>
-                        <div class="text-2xl font-bold tracking-widest">020-101-373478</div>
+                        <div class="text-2xl font-bold tracking-widest text-custom-accent">020-101-373478</div>
                     </div>
 
-                    <!-- True Wallet Card -->
-                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-secondary cursor-pointer" onclick="copyText('0969207454')">
+                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-primary cursor-pointer" onclick="copyText('0969207454')">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold text-custom-primary uppercase">TrueMoney Wallet</span>
-                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full">คัดลอก</span>
+                            <span class="text-xs font-bold text-custom-accent uppercase">TrueMoney Wallet</span>
+                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full text-custom-accent">คัดลอก</span>
                         </div>
-                        <div class="text-2xl font-bold tracking-widest">096-920-7454</div>
+                        <div class="text-2xl font-bold tracking-widest text-custom-accent">096-920-7454</div>
                     </div>
                 </div>
 
                 <div class="bg-custom-secondary/50 rounded-2xl p-4 text-center">
-                    <p class="text-xs font-medium leading-relaxed">ยกเลิกคืนเงิน 50% เเจ้งสลิปทุกครั้งที่โอนนะคะ!<br>เช็คชื่อและเลขบัญชีให้ดีก่อนโอนน้า</p>
+                    <p class="text-xs font-medium leading-relaxed text-custom-accent">ยกเลิกคืนเงิน 50% เเจ้งสลิปทุกครั้งที่โอนนะคะ!<br>เช็คชื่อและเลขบัญชีให้ดีก่อนโอนน้า</p>
                 </div>
             </div>
         </div>
@@ -113,11 +113,11 @@
 
     <script>
         function copyText(text) {
-           navigator.clipboard.writeText(text);
-           const toast = document.getElementById('toast');
-           toast.style.opacity = '1';
-           toast.style.transform = 'translate(-50%, 0)';
-           setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, 0)';
+            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         }
     </script>
 </body>
