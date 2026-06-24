@@ -11,61 +11,37 @@
     <style>
         body {
             font-family: 'Prompt', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #eef2ff 0%, #ede9fe 100%);
             min-height: 100vh;
         }
         
         @keyframes float-up-down {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(10deg); }
-        }
-        @keyframes float-left-right {
-            0%, 100% { transform: translateX(0px) rotate(0deg); }
-            50% { transform: translateX(15px) rotate(-10deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
         @keyframes pulse-soft {
             0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
-        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-
         @keyframes dash-animation {
             from { stroke-dashoffset: 0; }
             to { stroke-dashoffset: -24; }
         }
-        .animate-dash {
-            animation: dash-animation 1s linear infinite;
-        }
-
-        .anim-float-1 { animation: float-up-down 4s ease-in-out infinite; }
-        .anim-float-2 { animation: float-up-down 5s ease-in-out infinite 1.5s; }
-        .anim-float-3 { animation: float-left-right 6s ease-in-out infinite; }
-        .anim-float-4 { animation: float-left-right 4.5s ease-in-out infinite 2s; }
+        .animate-dash { animation: dash-animation 1s linear infinite; }
+        .anim-float { animation: float-up-down 4s ease-in-out infinite; }
         .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
-        .anim-spin { animation: spin-slow 8s linear infinite; }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 1);
-            box-shadow: 0 20px 50px -10px rgba(56, 189, 248, 0.15), 
-                        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.15);
         }
 
         .virtual-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
         }
-        .virtual-card:hover {
-            transform: translateY(-4px);
-        }
-        .virtual-card:active {
-            transform: translateY(2px) scale(0.98);
-        }
-        
-        ::-webkit-scrollbar {
-            width: 0px;
-        }
+        .virtual-card:hover { transform: translateY(-2px); }
     </style>
     
     <script>
@@ -73,15 +49,11 @@
             theme: {
                 extend: {
                     colors: {
-                        blue: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
+                        custom: {
+                            primary: '#a78bfa',
+                            secondary: '#ddd6fe',
+                            accent: '#8b5cf6',
+                            text: '#5b21b6'
                         }
                     }
                 }
@@ -89,175 +61,63 @@
         }
     </script>
 </head>
-<body class="flex flex-col items-center py-6 px-4 text-blue-700 relative overflow-x-hidden">
+<body class="flex flex-col items-center py-10 px-4 text-custom-text">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <svg class="absolute top-[5%] left-[10%] w-8 h-8 text-blue-300 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[15%] left-[2%] w-6 h-6 text-blue-200/60 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[8%] left-[25%] w-4 h-4 text-blue-400/50 anim-float-3" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-        <svg class="absolute top-[10%] right-[8%] w-10 h-10 text-blue-200 anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[2%] right-[20%] w-5 h-5 text-blue-200/80 anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute top-[40%] -left-2 w-12 h-12 text-blue-100 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute top-[50%] right-[2%] w-6 h-6 text-blue-300 anim-float-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <svg class="absolute bottom-[10%] left-[10%] w-8 h-8 text-blue-200 anim-float-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-        <svg class="absolute bottom-[5%] right-[15%] w-7 h-7 text-blue-200/70 anim-float-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        <svg class="absolute bottom-[20%] right-[5%] w-4 h-4 text-blue-400/40 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
-    </div>
-
-    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-blue-500/95 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm border border-blue-400">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-blue-100">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-custom-primary/90 text-white px-6 py-3 rounded-2xl shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 font-medium">
         คัดลอกเลขบัญชีแล้ว
     </div>
 
-    <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
-        
-        <div class="text-center pt-2 pb-2 relative">
-            <h1 class="text-2xl font-bold tracking-tight text-blue-500 flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-blue-400 anim-pulse">
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                </svg>
-                Honeplycha
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-blue-400 anim-pulse transform -scale-x-100">
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                </svg>
-            </h1>
-            <p class="text-sm font-medium text-blue-400 mt-1">Payment & Checkout</p>
+    <div class="max-w-[400px] w-full space-y-6">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-custom-accent">Honeplycha</h1>
+            <p class="text-custom-primary font-medium">Payment & Checkout</p>
         </div>
 
-        <div class="glass-card rounded-[40px] p-3 relative z-10">
-            <svg class="absolute -top-4 -left-2 w-9 h-9 text-blue-300 anim-float-1 z-20 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            <svg class="absolute top-[25%] -right-3 w-7 h-7 text-blue-200 anim-float-2 z-20 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-            <svg class="absolute bottom-[40%] -left-3 w-5 h-5 text-blue-400 anim-spin z-20 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-
-            <div class="relative p-2 rounded-[36px] z-10">
-                <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="2" y="2" width="calc(100% - 4px)" height="calc(100% - 4px)" rx="34" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="12 12" stroke-linecap="round" class="animate-dash" />
-                </svg>
-                <div class="rounded-[28px] overflow-hidden relative shadow-sm border-[4px] border-white">
-                    <img src="att.CrJXkeYB5O4Zn8mHjDEmgN9E8cRGxbU32ai8jFNk9M0.jpg" alt="บัญชี Honeplycha" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/600x600/e0f2fe/0ea5e9?text=Honeplycha+Payment'">
-                </div>
+        <div class="glass-card rounded-[3rem] p-4">
+            <div class="rounded-[2.5rem] overflow-hidden border-4 border-white shadow-inner">
+                <img src="att.CrJXkeYB5O4Zn8mHjDEmgN9E8cRGxbU32ai8jFNk9M0.jpg" alt="บัญชี Honeplycha" class="w-full h-auto">
             </div>
 
-            <div class="p-4 pt-6 space-y-5">
-                
-                <div class="text-center space-y-3">
-                    <p class="text-[15px] font-medium leading-relaxed text-blue-700">
-                        <span class="inline-flex items-center justify-center gap-1">
-                            เลขบัญชีตามนี้เลยค่า
-                            <svg class="w-4 h-4 text-blue-400 anim-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        </span>
-                        <br>ชื่อบัญชี <span class="text-blue-500 font-bold bg-blue-50/80 px-2.5 py-0.5 rounded-lg border border-blue-100 relative inline-block">
-                            อนันท์ญา จูมจันทร์
-                            <svg class="absolute -top-2 -right-2.5 w-4 h-4 text-blue-400 anim-float-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        </span>เท่านั้นน้า!!
-                    </p>
-                    
-                    <div class="inline-flex items-center justify-center gap-1.5 text-[11px] text-blue-500 font-medium bg-blue-50/50 px-4 py-2.5 rounded-full border border-blue-100 shadow-sm whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-blue-400 shrink-0">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
-                        </svg>
-                        เซฟรูปสแกน หรือจิ้มคัดลอกเลขบัญชีได้เลยน้า
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-blue-400 shrink-0">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3 py-2">
-                    <div class="h-px bg-blue-100 flex-1"></div>
-                    <span class="text-[11px] font-semibold text-blue-300 tracking-wider uppercase">เลือกช่องทางชำระเงิน</span>
-                    <div class="h-px bg-blue-100 flex-1"></div>
+            <div class="p-6 space-y-6">
+                <div class="text-center space-y-1">
+                    <p class="font-bold text-lg">เลขบัญชีตามนี้เลยค่า</p>
+                    <p class="text-sm">ชื่อบัญชี: <span class="font-bold text-custom-accent">อนันท์ญา จูมจันทร์</span></p>
                 </div>
 
                 <div class="space-y-4">
-                    
-                    <div class="virtual-card relative bg-gradient-to-br from-blue-400 to-blue-500 rounded-[24px] p-5 shadow-lg shadow-blue-500/20 overflow-hidden cursor-pointer border border-blue-300/30" onclick="copyText('020101373478', this, 'gsb')">
-                        <svg class="absolute -right-6 -bottom-6 w-32 h-32 text-white opacity-10 transform -rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        
-                        <div class="relative z-10 flex flex-col gap-4">
-                            <div class="flex justify-between items-center">
-                                <div class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
-                                    <span class="text-white font-bold text-sm tracking-wider">GSB</span>
-                                </div>
-                                <button class="gsb-btn bg-white text-blue-500 text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                    คัดลอก
-                                </button>
-                            </div>
-                            <div class="mt-2">
-                                <div class="text-white/90 text-[11px] font-medium mb-1 drop-shadow-sm">ธนาคารออมสิน (อนันท์ญา)</div>
-                                <div class="text-white font-bold text-[22px] tracking-widest leading-none drop-shadow-md">020-101-373478</div>
-                            </div>
+                    <!-- GSB Card -->
+                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-secondary cursor-pointer" onclick="copyText('020101373478')">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-custom-primary uppercase">ธนาคารออมสิน</span>
+                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full">คัดลอก</span>
                         </div>
+                        <div class="text-2xl font-bold tracking-widest">020-101-373478</div>
                     </div>
 
-                    <div class="virtual-card relative bg-gradient-to-br from-blue-300 to-blue-400 rounded-[24px] p-5 shadow-lg shadow-blue-400/20 overflow-hidden cursor-pointer border border-blue-200/50" onclick="copyText('0969207454', this, 'true')">
-                        <svg class="absolute -left-6 -top-6 w-32 h-32 text-white opacity-20 transform rotate-12 pointer-events-none" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-
-                        <div class="relative z-10 flex flex-col gap-4">
-                            <div class="flex justify-between items-center">
-                                <div class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
-                                    <span class="text-white font-bold text-sm tracking-wider">TrueMoney</span>
-                                </div>
-                                <button class="true-btn bg-white text-blue-500 text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                                    คัดลอก
-                                </button>
-                            </div>
-                            <div class="mt-2">
-                                <div class="text-white/90 text-[11px] font-medium mb-1 drop-shadow-sm">ทรูมันนี่ (อนันท์ญา)</div>
-                                <div class="text-white font-bold text-[22px] tracking-widest leading-none drop-shadow-md">096-920-7454</div>
-                            </div>
+                    <!-- True Wallet Card -->
+                    <div class="virtual-card bg-white p-5 rounded-[2rem] border-2 border-custom-secondary cursor-pointer" onclick="copyText('0969207454')">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-custom-primary uppercase">TrueMoney Wallet</span>
+                            <span class="text-[10px] bg-custom-secondary px-2 py-1 rounded-full">คัดลอก</span>
                         </div>
+                        <div class="text-2xl font-bold tracking-widest">096-920-7454</div>
                     </div>
+                </div>
 
-                    <div class="virtual-card relative bg-gradient-to-r from-blue-500 to-blue-600 rounded-[24px] p-5 shadow-lg shadow-blue-500/20 overflow-hidden cursor-pointer border border-blue-400/30" onclick="copyText('ซื้อขายกับร้าน Honeplycha', this, 'note')">
-                        <div class="relative z-10 flex flex-col gap-4">
-                            <div class="flex justify-between items-center">
-                                <div class="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
-                                    <span class="text-white font-bold text-sm tracking-wider">Note</span>
-                                </div>
-                                <button class="note-btn bg-white text-blue-600 text-[12px] font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm pointer-events-none">
-                                    คัดลอกข้อความ
-                                </button>
-                            </div>
-                            <div class="mt-2">
-                                <div class="text-white font-bold text-[18px] tracking-wide drop-shadow-md">"ซื้อขายกับร้าน Honeplycha"</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-blue-100/90 border border-blue-200 rounded-2xl p-3 flex items-start gap-3 text-left">
-                        <div class="bg-white p-1.5 rounded-full shadow-sm text-blue-400 flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
-                        <div class="text-[13px] leading-relaxed text-blue-800 font-medium">
-                            ยกเลิกคืนเงิน 50% เเจ้งสลิปทุกครั้ง!<br>
-                            <span class="text-blue-400 text-[12px] font-normal flex items-center gap-1 flex-wrap">
-                                รบกวนเช็คชื่อและเลขบัญชีให้ดีก่อนโอนน้า 
-                                <svg class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                            </span>
-                        </div>
-                    </div>
+                <div class="bg-custom-secondary/50 rounded-2xl p-4 text-center">
+                    <p class="text-xs font-medium leading-relaxed">ยกเลิกคืนเงอน 50% เเจ้งสลิปทุกครั้งที่โอนนะคะ!<br>เช็คชื่อและเลขบัญชีให้ดีก่อนโอนน้า</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function copyText(text, element, type) {
+        function copyText(text) {
            navigator.clipboard.writeText(text);
            const toast = document.getElementById('toast');
            toast.style.opacity = '1';
            toast.style.transform = 'translate(-50%, 0)';
-           setTimeout(() => {
-               toast.style.opacity = '0';
-               toast.style.transform = 'translate(-50%, 1rem)';
-           }, 2000);
+           setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         }
     </script>
 </body>
